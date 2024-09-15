@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BusinessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
 using DtoLayer.AboutDto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +9,12 @@ namespace SignalRApi.Controllers
     public class AboutsController : ControllerBase
     {
         private readonly IAboutService _aboutService;
-        private readonly IMapper _mapper;
 
-        public AboutsController(IAboutService aboutService, IMapper mapper)
+
+        public AboutsController(IAboutService aboutService)
         {
             _aboutService = aboutService;
-            _mapper = mapper;
+
         }
 
         [HttpGet]
