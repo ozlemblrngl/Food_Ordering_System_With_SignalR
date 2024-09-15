@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfSocialMediaDal : GenericRepository<SocialMedia>, IGenericDal<SocialMedia>
+    public class EfSocialMediaDal : GenericRepository<SocialMedia>, IGenericDal<SocialMedia>, ISocialMediaDal
     {
         public EfSocialMediaDal(SignalRContext context) : base(context)
         {

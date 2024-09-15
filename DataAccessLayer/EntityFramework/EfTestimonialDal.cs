@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfTestimonialDal : GenericRepository<Testimonial>, IGenericDal<Testimonial>
+    public class EfTestimonialDal : GenericRepository<Testimonial>, IGenericDal<Testimonial>, ITestimonialDal
     {
         public EfTestimonialDal(SignalRContext context) : base(context)
         {

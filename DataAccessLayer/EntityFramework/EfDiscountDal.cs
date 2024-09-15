@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfDiscountDal : GenericRepository<Discount>, IGenericDal<Discount>
+    public class EfDiscountDal : GenericRepository<Discount>, IGenericDal<Discount>, IDiscountDal
     {
         public EfDiscountDal(SignalRContext context) : base(context)
         {

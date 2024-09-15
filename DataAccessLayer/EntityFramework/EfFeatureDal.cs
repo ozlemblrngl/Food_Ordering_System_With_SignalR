@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfFeatureDal : GenericRepository<Feature>, IGenericDal<Feature>
+    public class EfFeatureDal : GenericRepository<Feature>, IGenericDal<Feature>, IFeatureDal
     {
         public EfFeatureDal(SignalRContext context) : base(context)
         {

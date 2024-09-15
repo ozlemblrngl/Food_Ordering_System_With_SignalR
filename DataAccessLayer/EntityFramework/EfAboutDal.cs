@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfAboutDal : GenericRepository<About>, IGenericDal<About>
+    public class EfAboutDal : GenericRepository<About>, IGenericDal<About>, IAboutDal
     {
         public EfAboutDal(SignalRContext context) : base(context)
         {
