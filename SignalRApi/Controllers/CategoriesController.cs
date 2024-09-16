@@ -1,5 +1,7 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.CategoryDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SignalRApi.Controllers
@@ -8,17 +10,19 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
-            this.categoryService = categoryService;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult CategoryList()
         {
-            var result = _categoryService.TGetList();
+            var result = _mapper.Map<List<ResultCategoryDto>>(_categoryService.TGetList());
             return Ok(result);
         }
 
@@ -26,7 +30,8 @@ namespace SignalRApi.Controllers
 
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            _categoryService.TAdd(createCategoryDto);
+            var category = _mapper.Map<Category>(createCategoryDto);
+            _categoryService.TAdd(category);
             return Ok("Kategori  kaydedildi");
         }
 
@@ -34,8 +39,10 @@ namespace SignalRApi.Controllers
 
         public IActionResult DeleteCategory(int id)
         {
-            var result = _categoryService.TGetById(id);
-            _categoryService.TDelete(result);
+            var category = _categoryService.TGetById(id);
+            if (category == null) return NotFound("Kategori Bulunamadı.");
+
+            _categoryService.TDelete(category);
             return Ok("Kategori silindi.");
         }
 
@@ -43,7 +50,8 @@ namespace SignalRApi.Controllers
 
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            _categoryService.TUpdate(updateCategoryDto);
+            var category = _mapper.Map<Category>(updateCategoryDto);
+            _categoryService.TUpdate(category);
             return Ok("Kategori güncellendi.");
         }
 
@@ -51,7 +59,13 @@ namespace SignalRApi.Controllers
 
         public IActionResult GetCategory(int id)
         {
-            var result = _categoryService.TGetById(id);
+            var category = _categoryService.TGetById(id);
+            if (category == null)
+            {
+                return NotFound("Kategori Bulunamadı.");
+            }
+
+            var result = _mapper.Map<GetCategoryDto>(category);
             return Ok(result);
         }
     }
