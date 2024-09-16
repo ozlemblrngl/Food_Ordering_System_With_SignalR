@@ -22,50 +22,46 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult CategoryList()
         {
-            var result = _mapper.Map<List<ResultCategoryDto>>(_categoryService.TGetList());
+            var categoryList = _categoryService.TGetList();
+            var result = _mapper.Map<List<ResultCategoryDto>>(categoryList);
             return Ok(result);
         }
 
         [HttpPost]
-
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            var category = _mapper.Map<Category>(createCategoryDto);
-            _categoryService.TAdd(category);
-            return Ok("Kategori  kaydedildi");
+            var categoryEntity = _mapper.Map<Category>(createCategoryDto);
+            _categoryService.TAdd(categoryEntity);
+            return Ok("Kategori kaydedildi.");
         }
 
-        [HttpDelete]
-
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
-            var category = _categoryService.TGetById(id);
-            if (category == null) return NotFound("Kategori Bulunamadı.");
+            var categoryEntity = _categoryService.TGetById(id);
+            if (categoryEntity == null)
+                return NotFound("Kategori bulunamadı.");
 
-            _categoryService.TDelete(category);
+            _categoryService.TDelete(categoryEntity);
             return Ok("Kategori silindi.");
         }
 
         [HttpPut]
-
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            var category = _mapper.Map<Category>(updateCategoryDto);
-            _categoryService.TUpdate(category);
+            var categoryEntity = _mapper.Map<Category>(updateCategoryDto);
+            _categoryService.TUpdate(categoryEntity);
             return Ok("Kategori güncellendi.");
         }
 
         [HttpGet("GetById")]
-
         public IActionResult GetCategory(int id)
         {
-            var category = _categoryService.TGetById(id);
-            if (category == null)
-            {
-                return NotFound("Kategori Bulunamadı.");
-            }
+            var categoryEntity = _categoryService.TGetById(id);
+            if (categoryEntity == null)
+                return NotFound("Kategori bulunamadı.");
 
-            var result = _mapper.Map<GetCategoryDto>(category);
+            var result = _mapper.Map<GetCategoryDto>(categoryEntity);
             return Ok(result);
         }
     }

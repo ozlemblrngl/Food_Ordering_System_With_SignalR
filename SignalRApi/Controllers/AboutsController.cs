@@ -1,5 +1,7 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.AboutDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SignalRApi.Controllers
@@ -9,31 +11,31 @@ namespace SignalRApi.Controllers
     public class AboutsController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+        private readonly IMapper _mapper;
 
-
-        public AboutsController(IAboutService aboutService)
+        public AboutsController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
-
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult AboutList()
         {
             var result = _aboutService.TGetList();
-            return Ok(result);
+            var mappedResult = _mapper.Map<List<ResultAboutDto>>(result);
+            return Ok(mappedResult);
         }
 
         [HttpPost]
-
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            _aboutService.TAdd(createAboutDto);
+            var aboutEntity = _mapper.Map<About>(createAboutDto);
+            _aboutService.TAdd(aboutEntity);
             return Ok("Hakkımda alanı başarılı bir şekilde eklendi.");
         }
 
         [HttpDelete]
-
         public IActionResult DeleteAbout(int id)
         {
             var result = _aboutService.TGetById(id);
@@ -42,20 +44,19 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            _aboutService.TUpdate(updateAboutDto);
+            var aboutEntity = _mapper.Map<About>(updateAboutDto);
+            _aboutService.TUpdate(aboutEntity);
             return Ok("Hakkımda alanı başarılı şekilde güncellendi.");
         }
 
         [HttpGet("GetById")]
-
         public IActionResult GetAbout(int id)
         {
             var result = _aboutService.TGetById(id);
-            return Ok(result);
+            var mappedResult = _mapper.Map<GetAboutDto>(result);
+            return Ok(mappedResult);
         }
-
     }
 }
