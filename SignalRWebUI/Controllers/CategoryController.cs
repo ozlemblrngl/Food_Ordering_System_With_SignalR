@@ -56,8 +56,7 @@ namespace SignalRWebUI.Controllers
 
 		}
 
-		[HttpDelete]
-
+		// [HttpDelete] varken silme actionını çalıştırmadı 
 		public async Task<IActionResult> DeleteCategory(int id)
 		{
 			var client = _httpClientFactory.CreateClient();
