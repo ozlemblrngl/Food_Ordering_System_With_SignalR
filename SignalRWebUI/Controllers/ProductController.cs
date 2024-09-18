@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using SignalRWebUI.Dtos.CategoryDtos;
 using SignalRWebUI.Dtos.ProductDtos;
 using System.Text;
 
@@ -35,10 +37,28 @@ namespace SignalRWebUI.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult CreateProduct()
+		public async Task<IActionResult> CreateProduct()
 		{
+			var client = _httpClientFactory.CreateClient();
+			var responseMessage = await client.GetAsync("https://localhost:7122/api/Categories");
+
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+				List<SelectListItem> values2 = (from x in values
+												select new SelectListItem
+												{
+													Text = x.Name,
+													Value = x.Id.ToString()
+												}).ToList();
+				ViewBag.Values = values2;
+			}
+
 			return View();
 		}
+
+
 
 		[HttpPost]
 

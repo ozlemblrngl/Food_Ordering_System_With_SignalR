@@ -34,8 +34,8 @@
 						</div>
 						<div class="card-body">
 							<div class="form-group">
-								<label for="imageurl">Ürün Kategorisini Seçiniz</label>
-								<input type="text" class="form-control" asp-for="ImageUrl" id="imageurl">
+								<label for="category">Ürün Kategorisini Seçiniz</label>
+								@Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.Values, new { @class = "form-control" })
 							</div>
 						</div>
 						<div class="card-body">
