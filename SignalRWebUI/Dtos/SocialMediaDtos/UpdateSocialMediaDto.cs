@@ -1,6 +1,6 @@
-﻿namespace EntityLayer.Entities
+﻿namespace SignalRWebUI.Dtos.SocialMediaDtos
 {
-	public class SocialMedia
+	public class UpdateSocialMediaDto
 	{
 		public int Id { get; set; }
 
