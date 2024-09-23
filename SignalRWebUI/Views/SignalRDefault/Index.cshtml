@@ -12,8 +12,12 @@
                     <div class="card">
                         <script type="text/javascript">
                             $(document).ready(() => {
-                                var connection = new signalR.HubConnectionBuilder().withUrl("")
-                            })
+                                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7122/SignalRHub").build();
+                                $("#connstatus").text(connection.state);
+                                connection.start().then(() => {
+                                    $("#connstatus").text(connection.state);
+                                }).catch((err) => { console.log(err) });
+                            });
                         </script>
                     </div>
 
@@ -25,3 +29,10 @@
     </div>
 }
 
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-success">
+            Bağlantının Durumu : <strong id="connstatus"> </strong>
+        </div>
+    </div>
+</div>
