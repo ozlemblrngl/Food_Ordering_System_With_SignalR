@@ -89,7 +89,6 @@ namespace SignalRWebUI.Controllers
 			var jsonData = JsonConvert.SerializeObject(updateFeatureDto);
 			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-			// PUT isteği ile güncelleme yapılır
 			var responseMessage = await client.PutAsync("https://localhost:7122/api/Features", stringContent);
 
 			if (responseMessage.IsSuccessStatusCode)
