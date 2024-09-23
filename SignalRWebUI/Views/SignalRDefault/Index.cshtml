@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts{   
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <script type="text/javascript">
+                            $(document).ready(() => {
+                                var connection = new signalR.HubConnectionBuilder().withUrl("")
+                            })
+                        </script>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
