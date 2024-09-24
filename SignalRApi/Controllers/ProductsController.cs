@@ -27,6 +27,12 @@ namespace SignalRApi.Controllers
 			return Ok(result);
 		}
 
+		[HttpGet("ProductCount")]
+
+		public IActionResult ProductCount()
+		{
+			return Ok(_productService.TProductCount());
+		}
 		[HttpPost]
 		public IActionResult CreateProduct(CreateProductDto createProductDto)
 		{
