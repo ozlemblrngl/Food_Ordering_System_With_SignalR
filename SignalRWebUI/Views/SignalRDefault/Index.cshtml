@@ -20,6 +20,11 @@
                                     $("#connstatus").text(connection.state);
                                 }).catch((err) => { console.log(err) });
                             });
+
+                            connection.invoke("SendCategoryCount");
+                            connection.on("ReceiveCategoryCount", (value) => {
+
+                            });
                         </script>
                     </div>
 
@@ -35,6 +40,9 @@
     <div class="col-md-8 offset-2">
         <div class="alert alert-success">
             Bağlantının Durumu : <strong id="connstatus"> </strong>
+        </div>
+        <div class="alert alert-info">
+            Kategori Sayısı : <strong id="categoryCount"> </strong>
         </div>
     </div>
 </div>
