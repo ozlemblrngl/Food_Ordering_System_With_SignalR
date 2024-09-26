@@ -57,5 +57,10 @@ namespace BusinessLayer.Concrete
 		{
 			_productDal.Update(entity);
 		}
+
+		public decimal TProductPriceAvg()
+		{
+			return _productDal.ProductPriceAvg();
+		}
 	}
 }

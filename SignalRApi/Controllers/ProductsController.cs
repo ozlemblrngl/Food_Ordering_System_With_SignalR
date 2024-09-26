@@ -47,6 +47,15 @@ namespace SignalRApi.Controllers
 		{
 			return Ok(_productService.TProductCount());
 		}
+
+		[HttpGet("ProductPriceAvg")]
+
+		public IActionResult ProductPriceAvg()
+		{
+			return Ok(_productService.TProductPriceAvg());
+		}
+
+
 		[HttpPost]
 		public IActionResult CreateProduct(CreateProductDto createProductDto)
 		{

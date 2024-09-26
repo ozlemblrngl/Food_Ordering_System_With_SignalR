@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 
 		int TProductCountByCategoryNameHamburger();
 		int TProductCountByCategoryNameDrink();
+
+		decimal TProductPriceAvg();
 	}
 }
