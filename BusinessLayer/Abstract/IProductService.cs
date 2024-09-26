@@ -11,5 +11,9 @@ namespace BusinessLayer.Abstract
 		int TProductCountByCategoryNameDrink();
 
 		decimal TProductPriceAvg();
+
+		string TProductNameByMaxPrice();
+
+		public string TProductNameByMinPrice();
 	}
 }
