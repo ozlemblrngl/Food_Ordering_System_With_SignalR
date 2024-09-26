@@ -24,5 +24,18 @@ namespace DataAccessLayer.EntityFramework
 			using var context = new SignalRContext();
 			return context.Products.Count();
 		}
+
+		public int ProductCountByCategoryNameDrink()
+		{
+			using var context = new SignalRContext();
+			return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.Name == "İçecek").Select(z => z.Id).FirstOrDefault())).Count();
+		}
+
+		public int ProductCountByCategoryNameHamburger()
+		{
+
+			using var context = new SignalRContext();
+			return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.Name == "Hamburger").Select(z => z.Id).FirstOrDefault())).Count();
+		}
 	}
 }

@@ -13,6 +13,16 @@ namespace BusinessLayer.Concrete
 			_productDal = productDal;
 		}
 
+		public int TProductCountByCategoryNameDrink()
+		{
+			return _productDal.ProductCountByCategoryNameDrink();
+		}
+
+		public int TProductCountByCategoryNameHamburger()
+		{
+			return _productDal.ProductCountByCategoryNameHamburger();
+		}
+
 		public void TAdd(Product entity)
 		{
 			_productDal.Add(entity);
